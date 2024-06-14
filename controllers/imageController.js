@@ -130,7 +130,6 @@ export const getProductImageController = async (req, res) => {
 
 
 
-
 // DELETE IMAGE CONTROLLER
 
 export const deleteProductImageController = async (req, res) => {
