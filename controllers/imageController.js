@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-
+// ADD IMAGE CONTROLLER
 
 // Get the current file path
 const __filename = fileURLToPath(import.meta.url);
@@ -39,8 +39,7 @@ const upload = multer({ storage: storage }).array('images', 10);
 // max you can upload upto 10 images at a time
 
 
-// ADD IMAGE CONTROLLER
-
+// Controller to handle file upload and save the paths in MongoDB
 export const addProductImageController = async (req, res) => {
     try {
         // Handle file upload
@@ -59,16 +58,17 @@ export const addProductImageController = async (req, res) => {
             const newImages = imageFiles.map(file => ({ path: `http://localhost:3001/profile/${file.path}` }));
 
             // Save the new images to the database by mapping their paths from newImages
-            const imageId = await imageModel.create({
+            const image = await imageModel.create({
                 path: newImages.map(image => image.path)
             });
 
-            res.status(201).json({ message: 'Product images added successfully', imageId: imageId._id }); //this id is added to the product
+            res.status(201).json({ message: 'Product images added successfully', imageId: image._id }); //this id is added to the product
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // EDIT IMAGE CONTROLLER
 
