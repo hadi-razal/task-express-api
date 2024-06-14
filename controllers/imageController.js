@@ -55,7 +55,7 @@ export const addProductImageController = async (req, res) => {
             }
 
             // Create new image documents with the file paths
-            const newImages = imageFiles.map(file => ({ path: `http://localhost:3001/profile/${file.path}` }));
+            const newImages = imageFiles.map(file => ({ path: `http://localhost:3001/uploads/${file.path}` }));
 
             // Save the new images to the database by mapping their paths from newImages
             const image = await imageModel.create({
@@ -88,7 +88,7 @@ export const editProductImageController = async (req, res) => {
             }
 
             // Create new image documents with the file paths
-            const newImages = imageFiles.map(file => ({ path: `http://localhost:3001/profile/${file.filename}` }));
+            const newImages = imageFiles.map(file => ({ path: `http://localhost:3001/uploads/${file.filename}` }));
 
             // Update the image paths in the database
             const updatedImage = await imageModel.findByIdAndUpdate(
